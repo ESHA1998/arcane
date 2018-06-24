@@ -4,7 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var nodemailer=require('nodemailer');
 
-var User = require('../models/user');
+var User=require('../models/user');
 
 // Register
 router.get('/register', function (req, res) {
@@ -63,22 +63,23 @@ router.post('/register', function (req, res) {
 						console.log(user);
 					});
 					var transporter = nodemailer.createTransport({
- 					host: 'gmail.com',
- 					port:587,
- 					secure:false,
+ 					service: 'gmail',
+ 					secure: false,
+  					port: 25,
  					auth: {
-        			user: 'esha251298@gmail.com',
-        			pass: 'esha123abc'
+            		user: 'esha251298@gmail.com',
+            		pass:'esha123abc'
    					},
    					tls:{
    						rejectUnauthorized:false
-   					}	
+   					}
 				});
+
 					const mailOptions = {
  					 from: '"Innerve Contact"<esha251298@gmail.com>', // we will put innerve's address here
   					 to: email, // list of receivers can be put if reqd
   					 subject: 'Innerve registeration', 
-  					 html: '<h3>Hi ${req.body.username}</h3><p>Thanks for registering for Innerve</p>'// other content can be put eg-events etc.
+  					 html: '<h3>Hi</h3><p>Thanks for registering for innerve.</p>'// other content can be put eg-events etc.
 				};
 				transporter.sendMail(mailOptions, function (err, info) {
    				if(err)
@@ -131,7 +132,9 @@ router.post('/login',
 	function (req, res) {
 		res.redirect('/question');
 	});
-
+router.get('/forgot-password2-just-to-make-it-complex',function(req,res){
+  res.send('forgot-password2');
+});
 router.get('/logout', function (req, res) {
 	req.logout();
 
