@@ -10,11 +10,13 @@
   "author": "Esha",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.1",
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "express": "*",
+    "express-flash": "0.0.2",
     "express-handlebars": "*",
     "express-messages": "*",
     "express-session": "*",
@@ -24,6 +26,8 @@
     "nodemailer": "^4.6.7",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "passport-local-mongoose": "^5.0.1",
+    "xoauth2": "^1.2.0"
   }
 }
