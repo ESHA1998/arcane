@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+//var passportLocalMongoose = require("passport-local-mongoose");
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -17,8 +18,17 @@ var UserSchema = mongoose.Schema({
 	},
 	question:{
 		type: Number
-	}
+	},
+
+	 resetPasswordToken: {
+	 	type: String
+	 },
+  resetPasswordExpires:{
+  		type: Date
+  } 
 });
+
+//UserSchema.plugin(passportLocalMongoose);
 
 var User = module.exports = mongoose.model('User', UserSchema);
 
@@ -29,6 +39,15 @@ module.exports.createUser = function(newUser, callback){
 	        newUser.save(callback);
 	    });
 	});
+}
+
+module.exports.setPassword=function(user,password,callback){
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(password, salt, function(err, hash) {
+	        user.password = hash;
+	        user.save(callback);
+	    });
+	});	
 }
 
 module.exports.getUserByUsername = function(username, callback){
