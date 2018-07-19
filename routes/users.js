@@ -132,9 +132,6 @@ router.post('/login',
 	function (req, res) {
 		res.redirect('/question');
 	});
-router.get('/forgot-password2-just-to-make-it-complex',function(req,res){
-  res.send('forgot-password2');
-});
 router.get('/logout', function (req, res) {
 	req.logout();
 
@@ -142,5 +139,4 @@ router.get('/logout', function (req, res) {
 
 	res.redirect('/users/login');
 });
-
 module.exports = router;

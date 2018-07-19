@@ -82,7 +82,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-
+//app.use('/leaderboard',routes/users);
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
@@ -92,7 +92,24 @@ app.get('/forgot-password',function(req,res){
   });
 });
 
+app.get('/leaderboard',function(req,res){
+  User.find({}).sort({question:-1}).exec(function(err,docs){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('index',{user:docs});
+    }
+  });
+});
+/*exphbs.registerHelper('each_upto', function(user, max, options) {
+    if(!user || user.length == 0)
+        return options.inverse(this);
 
+    var result = [ ];
+    for(var i = 0; i < max && i < user.length; ++i)
+        result.push(options.fn(user[i]));
+    return result.join('');
+});*/
 app.post('/forgot-password',function(req,res,next){
    async.waterfall([
     function(done) {
